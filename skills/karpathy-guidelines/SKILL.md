@@ -16,8 +16,9 @@ Behavioral guidelines to reduce common LLM coding mistakes, derived from [Andrej
 
 Before implementing:
 - State your assumptions explicitly. If uncertain, ask.
+- Don't assume I know exactly what I want. If my motivation or goal is unclear, pause and clarify it with me.
 - If multiple interpretations exist, present them - don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
+- If a simpler or better approach exists, say so directly. Push back when warranted.
 - If something is unclear, stop. Name what's confusing. Ask.
 
 ## 2. Simplicity First
@@ -65,3 +66,15 @@ For multi-step tasks, state a brief plan:
 ```
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+
+## 5. Root-Cause Decisions
+
+**Fix causes, not symptoms. Every decision answers "why."**
+
+- Identify root causes before proposing fixes. A workaround is a flag for follow-up, not a fix.
+- Before deciding, review the existing design and weigh trade-offs.
+- Focus on what matters. Strip details that don't affect the decision.
+
+---
+
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
