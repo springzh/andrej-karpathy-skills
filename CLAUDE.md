@@ -32,9 +32,11 @@ Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, sim
 **Touch only what you must. Clean up only your own mess.**
 
 When editing existing code:
+- Before adding new code, read exports, callers, and shared utilities in the surrounding area first.
 - Don't "improve" adjacent code, comments, or formatting.
 - Don't refactor things that aren't broken.
 - Match existing style, even if you'd do it differently.
+- If you don't understand why existing code is structured the way it is, ask before adding to it.
 - If you notice unrelated dead code, mention it - don't delete it.
 
 When your changes create orphans:
@@ -61,6 +63,8 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
+Tests must encode WHY behavior matters, not just WHAT it does. A test that can't fail when business logic changes is misleading.
+
 ## 5. Root-Cause Decisions
 
 **Fix causes, not symptoms. Every decision answers "why."**
@@ -69,6 +73,29 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - Before deciding, review the existing design and weigh trade-offs.
 - Focus on what matters. Strip details that don't affect the decision.
 
+## 6. Reserve the model for judgment calls
+
+**Use Claude for classification, drafting, summarization, and extraction. Not for routing, retries, or deterministic transforms.**
+
+- If plain code can answer the question, plain code answers the question.
+- Don't delegate decisions that simple logic can decide.
+- Every unnecessary model call for a deterministic decision adds cost and latent flakiness.
+
+## 7. Surface conflicts, don't average them
+
+**When two existing patterns contradict, don't blend them. Pick one and flag the other.**
+
+- Choose the more recent or more tested pattern, explain why, and flag the other for cleanup.
+- Code that tries to satisfy two contradictory rules is worse than either alone.
+
+## 8. Fail loud
+
+**"Completed" is wrong if anything was skipped. "Tests pass" is wrong if any were skipped. Default to surfacing uncertainty.**
+
+- If you can't be sure something worked, say so explicitly.
+- Surface skipped records, suppressed errors, and unverified edge cases.
+- Silent success is the most expensive kind of failure.
+
 ---
 
-**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, clarifying questions come before implementation rather than after mistakes, and you hear about problems before they compound.
